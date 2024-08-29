@@ -1,0 +1,306 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{marginnote,sidenotes}
+\usepackage{cabin}
+\usepackage[nomarginpar]{geometry}
+\usepackage{etoolbox}
+\usepackage{microtype}
+\usepackage{lettrine}
+\RequirePackage{marginfix}% automatically adjust the side-floats nicely 
+\usepackage{array,tabularx,booktabs} 
+\usepackage{titletoc}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage[labelfont=bf,textfont=md]{caption}
+\usepackage{capt-of}
+ \usepackage{dsfont}
+ \usepackage{nicefrac}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsfonts}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{cleveref}
+\crefformat{figure}{#2{\color{violet}#1}#3}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\usepackage{fontspec,unicode-math}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+%%%%%%%%%%COLORS%%%%%%%%%%%%%%%%%%%
+
+
+\definecolor{dgreen}{RGB}{0,154,84}
+\definecolor{sgreen}{RGB}{238,247,244}
+\definecolor{zgreen}{RGB}{56,129,93}
+
+\definecolor{dblue}{RGB}{0,110,185}
+\definecolor{sblue}{RGB}{240,243,250}
+\definecolor{zblue}{RGB}{65,106,150}
+\definecolor{nblue}{RGB}{212,244,245}
+\definecolor{tblue}{RGB}{0,163,211}
+
+\definecolor{nred}{RGB}{245,213,212}
+\definecolor{tred}{RGB}{211,48,0}
+
+\definecolor{royalpurple}{RGB}{120,81,169}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%NEWCOMMANDS%%%%%%%%%%%%%%
+
+\newcommand{\dis}{\displaystyle}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bn}{\begin{enumerate}}
+\newcommand{\en}{\end{enumerate}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%GEOMETRY%%%%%%%%%%%%
+
+\RequirePackage{geometry}
+\geometry{
+paperwidth=210mm,
+paperheight=297mm,
+left=42pt,
+top=72pt,
+textwidth=350pt,
+marginparsep=20pt,
+marginparwidth=140pt,
+textheight=650pt,
+footskip=40pt,
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%LETTER SPACING%%%%%%%%%%%%%%%%%
+\renewcommand{\normalsize}{\fontsize{10pt}{13pt}\selectfont}%
+\renewcommand{\footnotesize}{\fontsize{8pt}{10pt}\selectfont}%
+% fullwidth environment, text across textwidth+marginparsep+marginparwidth
+\newlength{\overhang}
+\setlength{\overhang}{\marginparwidth}
+\addtolength{\overhang}{\marginparsep}
+%
+\newenvironment{fullwidth}
+  {\ifthenelse{\boolean{@twoside}}%
+     {\begin{adjustwidth*}{}{-\overhang}}%
+     {\begin{adjustwidth}{}{-\overhang}}%
+  }%
+  {\ifthenelse{\boolean{@twoside}}%
+    {\end{adjustwidth*}}%
+    {\end{adjustwidth}}%
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%CHAPTER HEADER %%%%%%%%%%%%%%%%%%
+
+\renewcommand{\sffamily}{\color{TFFrameColor}}
+\renewcommand\LettrineTextFont{\color{TFFrameColor}\scshape}
+\usepackage[x11names]{xcolor}
+\newcommand*\ftsize[1]{\fontsize{#1pt}{\numexpr 1.2*#1\relax pt}\selectfont}
+\usepackage{colortbl}
+\usepackage{framed}
+\colorlet{TFFrameColor}{DodgerBlue3}
+\renewenvironment{leftbar}{%
+\def\FrameCommand{{\color{TFFrameColor}\vrule width 3pt} \hspace{12pt}}%
+\MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+\usepackage[explicit,newlinetospace]{titlesec}
+
+% New command to set the chapter abstract
+\newcommand{\chapterabstracttext}{}
+
+\newcommand{\setchapterabstract}[1]{%
+  \renewcommand{\chapterabstracttext}{\textit{Chapter abstract: } #1}%
+}
+
+\titleformat{\chapter}[hang]%
+{\usefont{T1}{phv}{m}{n}}% Font settings
+{%
+  \parbox[t]{\dimexpr0.12\linewidth-20pt\relax}{\fontsize{48}{48}\selectfont\raisebox{-1.25\height}{\color{TFFrameColor}\thechapter}}%
+}%
+{1em}%
+{%
+  \begin{minipage}[t]{1.36\textwidth}% Set to full text width
+    \begin{leftbar}%
+      {\bfseries\fontsize{24}{30}\selectfont\color{TFFrameColor}%
+        \rule{0pt}{2ex}\strut #1\hfil\vskip2ex\break%
+      }%
+      \chapterabstracttext%
+      \rule[-1.5ex]{0pt}{1.5ex}%
+    \end{leftbar}%
+  \end{minipage}%
+}
+\titlespacing{\chapter}{0pt}{2\baselineskip}{6\baselineskip}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%SECTION HEADER%%%%%%%%%%%%%%%%%%
+
+
+
+\titleformat{\section}
+  {\LettrineTextFont\Large\bfseries\color{black}}
+  {\thesection}
+  {1em}
+  {#1}
+  [{\color{DodgerBlue3}\titlerule[0.8pt]}]
+
+
+\titleformat{\subsection}
+  {\LettrineTextFont\Large\bfseries\color{black}}
+  {\thesubsection}
+  {1em}
+  {#1}
+  [{\color{DodgerBlue3}\titlerule[0.8pt]}]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%SIDE NOTE%%%%%%%%%%%%%%%%%%
+
+\renewcommand*{\raggedleftmarginnote}{\noindent}
+\renewcommand*{\raggedrightmarginnote}{\noindent}
+\newcommand{\mn}[1]{\textsuperscript{\thesidenote}{}\marginnote{\textsuperscript{\thesidenote}{}\itshape\footnotesize #1}\refstepcounter{sidenote}}
+\newcommand{\fn}[1]{\marginnote{\footnotesize{#1}}}
+\newcommand{\lec}[2]{{\setlength{\marginparwidth}{.07\paperwidth}\reversemarginpar\marginnote{\centering\footnotesize{\textsf{\bfseries #1}}\\#2}}}
+\newcommand{\sn}[1]{\sidenote{\footnotesize #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%MARGIN TOC%%%%%%%%%%
+
+\newcommand{\chaptoc}{
+    \startcontents[chapters]
+  \marginnote{
+    \begin{minipage}[b,inner sep=0,outer sep=0]{\linewidth}
+           { 
+            \bfseries
+            \sffamily
+             \centerline{Outline}
+        }
+        \vspace{0.5em}
+        \hrule
+        \vspace{0.5em}
+        {\footnotesize % Change the font size here to small
+                \printcontents[chapters]{}{1}{}
+            }
+        \vspace{0.5em}
+        \hrule
+        \end{minipage}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%THEOREMBOXES%%%%%%%%%%%%%%%%%%%%
+
+
+
+\NewTotalTColorBox[auto counter]{\Example}{+m +m}{
+notitle,
+colback=sgreen,
+colbacklower=white, 
+frame hidden,
+boxrule=0pt,
+bicolor,
+sharp corners,
+borderline west={4pt}{0pt}{dgreen},
+}{
+\textcolor{black}{
+\sffamily
+\textbf{{\color{dgreen}Example~\thetcbcounter.}} \\
+{\color{black} #1}
+}%
+}
+
+
+
+
+\NewTotalTColorBox[auto counter]{\Definition}{+m +m +m}{
+notitle,
+colback=sblue,
+colbacklower=white, 
+frame hidden,
+boxrule=0pt,
+bicolor,
+sharp corners,
+borderline west={4pt}{0pt}{DodgerBlue3},
+}{
+  \textcolor{black}{
+    \sffamily
+    \textbf{{\color{DodgerBlue3}Definition~\thetcbcounter:}} % Definition counter
+    \textbf{{\color{DodgerBlue3}#2}} \\  % Add definition name here
+    {\color{black} #1}  % Definition content
+  }%
+}
+
+
+
+\NewTotalTColorBox[auto counter]{\Remark}{+m +m}{
+notitle,
+colback=orange!5,
+colbacklower=white, 
+frame hidden,
+boxrule=0pt,
+bicolor,
+sharp corners,
+borderline west={4pt}{0pt}{orange},
+}{
+\textcolor{black}{
+\sffamily
+\textbf{{\color{orange}Remark~\thetcbcounter.}} \\
+{\color{black} #1}
+}%
+}
+
+
+
+
+
+\NewTotalTColorBox[auto counter]{\Proposition}{+m +m}{
+notitle,
+colback=royalpurple!7,
+colbacklower=white, 
+frame hidden,
+boxrule=0pt,
+bicolor,
+sharp corners,
+borderline west={4pt}{0pt}{royalpurple},
+}{
+\textcolor{royalpurple}{
+\sffamily
+\textbf{{\color{royalpurple}Proposition~\thetcbcounter.}} \\% 
+}%
+{\color{black}#1}
+\tcblower%
+\textcolor{royalpurple}{
+\sffamily 
+\textbf{{\color{royalpurple}Proof.}$\;$}%
+}%
+#2
+}
