@@ -1,0 +1,50 @@
+\pgfplotsset{compat = 1.16}
+
+\begin{tikzpicture}[scale=0.6,every node/.style={scale=2}]
+    \begin{axis}[
+        colormap = {custom}{color(0)=(nblue!20) color(1)=(nblue!30) color(2)=(nblue!40) color(3)=(nblue!50) color(4)=(nblue!60) color(5)=(nblue!70) color(6)=(nblue!80) color(7)=(nblue!90) color(8)=(nblue)
+        },
+        xlabel={$X$},
+        ylabel={$Y$},
+        xtick={1,2,3,4},
+        ytick={1,2,3,4},
+        xmin=0.5, xmax=4.5,
+        ymin=0.5, ymax=4.5,
+        axis on top,
+        point meta min=2,
+        point meta max=8,
+        nodes near coords={\pgfmathprintnumber\pgfplotspointmeta},
+        nodes near coords align={center},
+    ]
+        \addplot [
+            matrix plot*,
+            mesh/cols=4,
+            point meta=explicit,
+        ] table [meta=C] {
+            x y C
+            1 1 2
+            1 2 3
+            1 3 4
+            1 4 5
+            2 1 3
+            2 2 4
+            2 3 5
+            2 4 6
+            3 1 4
+            3 2 5
+            3 3 6
+            3 4 7
+            4 1 5
+            4 2 6
+            4 3 7
+            4 4 8
+        };
+    
+    \fill[red,draw=black,thick] (1.5,1.5) rectangle ++(1.5,0.5);
+    \fill[yellow,draw=black,thick] (1.5,2.5) rectangle ++(1.5,0.5);
+    \fill[red,draw=black,thick] (1.5,3.5) rectangle ++(1.5,0.5);
+    \fill[yellow,draw=black,thick] (2.5,1.5) rectangle ++(1.5,0.5);
+    \fill[yellow,draw=black,thick] (2.5,1.5) rectangle ++(1.5,0.5);
+    \fill[red,draw=black,thick] (3.5,1.5) rectangle ++(1.5,0.5);
+    \end{axis}
+\end{tikzpicture}
