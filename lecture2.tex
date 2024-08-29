@@ -1,0 +1,134 @@
+\setchapterabstract{This chapter is a foundational concept in probability theory that allows us to assess the likelihood of one event occurring given that another event has already happened. This chapter delves into the key principles and applications of conditional probability. We begin by exploring the fundamental difference between ordinary probability and conditional probability, emphasizing the importance of contextual dependence.}
+\chapter{Conditional Probability}
+\vspace{-1.5cm}
+
+
+
+
+%%%%%%INSERT TOC BELOW 1ST SECTION%%%%%%%%%%%%
+
+{\chaptoc\noindent\begin{minipage}[inner sep=0,outer sep=0]{0.9\linewidth}\section{Conditional Probability}\end{minipage}}
+
+
+In our previous lecture, we explored the fundamental concepts of probability theory. We established the core axioms that govern probabilities and their applications in calculating the likelihood of events. However, the world around us is rarely as simple as independent events happening in isolation. Often, the likelihood of one event occurring is influenced by the knowledge of another event having already happened
+
+\Example{Consider a sample space that includes three disjoint events, $A$, $B$, and $C$, as illustrated in Figure \cref{fig:condprobsimp}. Suppose we receive new information confirming that event $A$ has indeed occurred, but we do not have any updates about events $B$ and $C$. How does this additional information about event $A$ affect our original probability model?
+}
+
+Since events $A$, $B$, and $C$ are disjoint (as shown\sn{\input{condprobsimp}\captionof{figure}{Visual representation of the conditional probability of event $B$ and $C$ given event A. When $A$ occurs, the probability of $B$ and $C$ also occurring is zero, since the three events are mutually exclusive.}\label{fig:condprobsimp}} in Figure \cref{fig:condprobsimp}), they cannot happen at the same time. This means that if event $A$ occurs, events $B$ and $C$ cannot occur. Events $B$ and $C$ together form the complement of event $A$, denoted as $B \cup C = A^{c}$. Therefore, if $A$ is observed, $A^c$ cannot be observed, i.e.
+\[
+\mathds{P}(A^{c})=\mathds{P}(B \cup C)\overset{\text{(A3)}}{=}\mathds{P}(B) + \mathds{P}(C) = 0
+\]
+If and only if $\mathds{P}(B)=\mathds{P}(C)=0$.
+
+In this modified sample space, the probability distribution is also updated. The probability of event $A$ occurring is now $1$, which makes it a new sample space by axiom (A2), i.e. $\widehat{\Omega}\triangleq A$ , since it is the only event in the new sample space.
+
+\Example{
+Consider a sample space that includes three events, $A$, $B$, and $C$, of which event $C$ is disjoint from events $A$ and $B$, but events $A$ and $B$ are not disjoint as illustrated in Figure \cref{fig:condprobvis}. Suppose we receive new information confirming that event $A$ has indeed occurred, but we do not have any updates about events $B$ and $C$. How does this additional information about event $A$ affect our original probability model?
+}
+
+When we confirm that event $A$ has occurred, we must revise our probability model to reflect this new information as done in the previous example. Since event $C$ is mutually exclusive with events $A$ and $B$, we can immediately conclude that event $C$ can not occur, i.e. $\mathds{P}(C)=0$.
+
+Event\sn{\input{condprobvis}\captionof{figure}{Visual representation of the conditional probability of event $B$ given event $A$. When A occurs, the probability of $B$ also occurring is equivalent to the intersection between $A$ and $B$.}\label{fig:condprobvis}}$B$ can be broken down into two parts: the region where $B$ intersects with $A$ (the green region in Figure \cref{fig:condprobvis}), and the region where $B$ is observed without $A$.
+\[
+B=(A\cap B)\cup (A^{c}\cap B)
+\]
+However, since event $A$ is assumed to be observed, the latter region is no longer possible, i.e. $\mathds{P}(A^{c}\cap B)=0$. Therefore, the probability of event $B$ is reduced to
+\[
+\mathds{P}(B) \overset{\text{(A3)}}{=} \mathds{P}(A \cap B) + \mathds{P}(A^c \cap B) = \mathds{P}(A \cap B)
+\]
+Now, we need to establish the relationship between the probability of event $A$ and the probability of the intersection of events $A$ and $B$, denoted as $A \cap B$. In the revised model, event $A$ becomes the new sample space, and accordingly we denote it by $\widehat{\Omega}$. Moreover, we denote the intersection of events $A$ and $B$ as $\widehat{B}$ in the revised model. The problem is now equivalent to calculating the probability of $\widehat{B}$ within the new sample space $\widehat{\Omega}$. This is nothing more than a classic demonstration of the discrete uniform law:
+\[
+\begin{array}{ccl}
+\dis\frac{|\widehat{B}|}{|\widehat{\Omega}|} & = & \dis\frac{|A \cap B|}{|A|} \\[0.4cm]
+& = & \dis\frac{\dis\nicefrac{\dis|A \cap B|}{\dis|\Omega|}}{\dis\nicefrac{\dis|A|}{\dis|\Omega|}} \\[0.4cm]
+& = & \dis\frac{\mathds{P}(A \cap B)}{\mathds{P}(A)}
+\end{array}
+\]
+This ratio represents the probability of event $B$ occurring given that event $A$ has occurred. We define this as the conditional probability of $B$ conditioned on $A$.
+
+\Definition{
+Let $A,B\subseteq\Omega$, the conditional probability of an event $B$ conditioned on an event $A$ is given by
+\[
+\mathds{P}(B\mid A)\triangleq\frac{\mathds{P}(A \cap B)}{\mathds{P}(A)}
+\]
+}{Conditional Probability}
+
+
+Referring to Figure \ref{fig:condprobvis}, we can observe that $|A\cap B|= 3$ and $|A| = 8$. Using these values, we can calculate the conditional probability of $B$ given $A$ as:
+\[
+\begin{array}{ccl}
+\mathds{P}(B \mid A) &=& \dis\frac{P(A \cap B)}{P(A)} \\[0.4cm]
+&=& \dis\frac{|A \cap B|}{|A|}\\[0.4cm]
+&=& \dis\frac{3}{8}
+\end{array}
+\]
+
+\clearpage 
+\section{Die Roll Example}
+We consider a simple example where we utilize the conditional probability.
+\Example{
+Consider two four-faced dice. Let $B$ denote the event that one of the two die resulted in a value of $2$, and the other die resulted in a value of at least $2$. Moreover, define $M\triangleq\max(X,Y)$. What is the probability that $M=3$, where one of the dices has an attained value of $2$?
+}
+
+In this example, there are 16 possible outcomes, all equally likely. We define event $B$ as 
+\[
+B \triangleq \{(x, y)\in X\times Y \mid \min(x, y) = 2\}
+\]
+
+meaning one die shows a value of 2 and the other shows a value of least a 2. Figure \cref{fig:condprobexdice} illustrates\sn{\input{condprobexdice}\captionof{figure}{The sample space in this problem is reduced upon the occurrence of the event $B$ (highlighted in red).}\label{fig:condprobexdice}} these scenarios, we can see that event $B$ consists of the outcomes 
+\[
+B=\{(2,2), (2,3), (2,4), (3,2), (4,2)\}
+\] 
+Now, we want to find the probability that $M=3$ (i.e., the maximum value is 3) given that event $B$ has occurred. Out of the 5 scenarios for event $B$, only 2 of them result in an observation for $M$:
+\[
+M=\{(2,3), (3,2)\}
+\]
+Therefore, the conditional probability is calculated as
+\[
+\mathds{P}(M=3 \mid B) = \frac{2}{5}.
+\]
+
+Alternatively, we can directly apply the conditional probability formula to reach this result. In this case, we have:
+\[
+\mathds{P}(M=3\mid B)=\frac{\mathds{P}((M=3)\cap B)}{\mathds{P}(B)}=\frac{\nicefrac{2}{16}}{\nicefrac{5}{16}}=\frac{2}{5}
+\]
+
+\Remark{Conditional probabilities are same as ordinary probabilities, but applied to different situations. Intrinsically speaking, they obey the standard probability axioms.
+}
+
+The only crucial difference lies in the consideration of additional information.  Ordinary probability treats all events independently, while conditional probability takes into account the knowledge that another event has already transpired.  This context-dependence allows conditional probability to capture more nuanced relationships between events.
+
+
+\section{Properties of Conditional Probability}
+Conditional probability is a fundamental concept in probability theory that allows us to update our beliefs about the likelihood of events based on new information. In this section, we will expand our knowledge on conditional probabilities by developing some basic properties.
+
+We begin by emphasizing that conditional probability adheres to the same basic principles as ordinary probability, namely the probability axioms.
+\Proposition{Conditional probability satisfies the probability axioms.
+}
+{We shall demonstrate this for each axiom:
+\bi
+\item[(A1)] $\mathds{P}(A\mid B)\geqslant 0$, since
+\[
+\mathds{P}(A\mid B)=\frac{\mathds{P}(A\cap B)\geqslant 0}{\mathds{P}(B)>0}\geqslant 0
+\]
+\item[(A2)] $\mathds{P}(\Omega\mid B)=1$, since
+\[
+\mathds{P}(\Omega\mid B)=\frac{\mathds{P}(\Omega\cap B)}{\mathds{P}(B)}=\frac{\mathds{P}(B)}{\mathds{P}(B)}=1
+\]
+\item[(A3)] Assume $A\cap C=\emptyset$, then
+\[
+\begin{array}{ccl}
+\mathds{P}(A\cup C\mid B)&=&\dis\frac{\mathds{P}\big((A\cup C)\cap B\big)}{\mathds{P}(B)} \\[0.4cm]
+&=&\dis\frac{\mathds{P}\big((A\cap B)\cup(C\cap B)\big)}{\mathds{P}(B)} \\[0.4cm]
+&=&\dis\frac{\mathds{P}(A\cap B)}{\mathds{P}(B)} + \frac{\mathds{P}(C\cap B)}{\mathds{P}(B)} \\[0.4cm]
+&=&\dis\mathds{P}(A\mid B)+\mathds{P}(C\mid B)
+\end{array}
+\]
+Note that the pair of $A$ that belongs in $B$ is also disjoint from the part of $C$ that belongs to $B$.
+\ei
+}
+Thus, this ensures that our calculations and interpretations remain consistent within the framework of probability theory.
+
+
+
